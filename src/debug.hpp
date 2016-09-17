@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 
+// For use with format strings. Converts a boolean argument into a "true" or "false" string.
 #define BOOL_STRING(arg) arg ? "true" : "false"
 
 #ifdef DEBUG

@@ -4,13 +4,7 @@
 #include "Game.hpp"
 #include "debug.hpp"
 
-// Todo: Create makefile
-// g++ -std=c++14 -Wall -Wextra -Weffc++ -Wshadow -Wcast-qual -Wold-style-cast -Wfloat-equal -isystem include -O2 -DNDEBUG src/*.cpp -lSDL2 -o billiards
 
-//    on OSX add:  -Wl,-framework,Cocoa
-
-
-// int main(int argc, char** argv)
 int main()
 {
     DEBUG_LOG("Process start \n");

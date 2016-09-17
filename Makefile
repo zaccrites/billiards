@@ -30,12 +30,11 @@ endif
 CXXFLAGS=$(BASE_CXXFLAGS)
 LDFLAGS:=$(BASE_LDFLAGS) -lSDL2
 
+# Darwin = Mac OSX
 ifeq ($(OS), Darwin)
   LDFLAGS += -Wl,-framework,Cocoa
 endif
 
-# Set it up so that the linker uses the "-framework Cocoa" linker flags if
-# running on OSX
 
 SRC_DIR:=src
 OBJ_DIR:=$(BASE_OBJ_DIR)/src

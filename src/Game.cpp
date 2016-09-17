@@ -29,7 +29,6 @@ Game::Game() :
     m_IsRunning {false},
     m_pWindow {nullptr},
     m_pRenderer {nullptr},
-    // m_pPowerTexture {nullptr},
     m_BallTextures {},
     m_Balls {},
     m_BallForces {},
@@ -159,78 +158,6 @@ bool Game::createTextures()
         }
         m_BallTextures[profile.first] = pTexture;
     }
-
-
-    // // Create the POWER texture
-    // /*
-    //      XX   XX  X X X XXXXX XXX
-    //     X  X X  X X X X X     X  X
-    //     X  X X  X X X X X     X  X
-    //     XXX  X  X X X X XXXXX XXX
-    //     X    X  X X X X X     X X
-    //     X    X  X XXXXX X     X  X
-    //     X     XX   X X  XXXXX X  X
-    // */
-    // {
-    //     const size_t TEXTURE_WIDTH  {4 * 8};
-    //     const size_t TEXTURE_HEIGHT {7};
-
-    //     m_pPowerTexture = SDL_CreateTexture(
-    //         m_pRenderer,
-    //         SDL_PIXELFORMAT_ARGB8888,
-    //         SDL_TEXTUREACCESS_STATIC,
-    //         BALL_DIAMETER,
-    //         BALL_DIAMETER
-    //     );
-    //     if ( ! m_pPowerTexture)
-    //     {
-    //         return false;
-    //     }
-
-    //     SDL_SetTextureBlendMode(m_pPowerTexture, SDL_BLENDMODE_BLEND);
-
-
-    //     // Each row encoded as individual bits
-    //     uint8_t fontData[] = {
-    //         0x63, 0x2a, 0xfb, 0x80,
-    //         0x94, 0xaa, 0x82, 0x40,
-    //         0x94, 0xaa, 0x82, 0x40,
-    //         0xe4, 0xaa, 0xfb, 0x80,
-    //         0x84, 0xaa, 0x82, 0x80,
-    //         0x84, 0xbe, 0x82, 0x40,
-    //         0x83, 0x14, 0xfb, 0x40,
-    //     };
-
-
-    //     uint8_t textureData[TEXTURE_WIDTH * TEXTURE_HEIGHT * 4];
-    //     // Initialize texture data to all black and then clear the cells
-    //     // which we want to be transparent.
-    //     std::fill_n(textureData, sizeof(textureData), 0xff);
-
-    //     for (size_t i = 0; i < TEXTURE_WIDTH * TEXTURE_HEIGHT; ++i)
-    //     {
-    //         uint8_t byte  {fontData[i / 8]};
-    //         uint8_t bit   {fontData[i % 8]};
-    //         bool isBitSet {(byte & (1 << bit)) != 0};
-
-    //         if ( ! isBitSet)
-    //         {
-    //             textureData[4 * i + 3] = 0x00;  // Alpha
-    //         }
-    //     }
-
-    //     if (SDL_UpdateTexture(
-    //         m_pPowerTexture,
-    //         NULL,
-    //         textureData,
-    //         4 * sizeof(uint8_t) * TEXTURE_WIDTH
-    //     ) != 0) {
-    //         SDL_DestroyTexture(m_pPowerTexture);
-    //         return false;
-    //     }
-    // }
-
-
 
     return true;
 }
@@ -382,13 +309,6 @@ void Game::renderFrame()
     rect.h = POWER_BAR_HEIGHT;
     SDL_RenderFillRect(m_pRenderer, &rect);
 
-    // // Draw "POWER" label
-    // rect.x = POWER_BAR_LEFT_COORD;
-    // rect.y = POWER_BAR_TOP_COORD - 50;
-    // SDL_QueryTexture(m_pPowerTexture, NULL, NULL, &rect.w, &rect.h);
-    // SDL_RenderCopy(m_pRenderer, m_pPowerTexture, NULL, &rect);
-
-
     // Draw Felt
     SDL_SetRenderDrawColor(m_pRenderer, 19, 132, 23, 0xff);
     rect.x = FELT_LEFT_COORD;
@@ -438,7 +358,6 @@ void Game::renderFrame()
         rect.y = ball.position.y - (BALL_DIAMETER / 2);
         SDL_RenderCopy(m_pRenderer, ball.m_pTexture, NULL, &rect);
     }
-
 
 }
 
@@ -659,20 +578,7 @@ void Game::handleMouseClick(const SDL_MouseButtonEvent* pEvent)
     {
         case SDL_BUTTON_LEFT:
         {
-            // if (pEvent->state != SDL_RELEASED)
-            // {
-            //     // Do the event on release
-            //     break;
-            // }
-
             Ball *pCueBall = &m_Balls[0];
-
-            // Todo: Change to impart force to cue ball.
-            //       Then simulate collisions between balls, imparting force
-            //       to other balls. Then integrate acceleration (F=ma) to
-            //       modify velocity. On collision, kinetic energy (E = 0.5 * m * v^2)
-            // How does the collision angle affect the resulting force direction?
-            // Glancing blows?
 
             glm::vec2 force {
                 (pEvent->x - pCueBall->position.x),

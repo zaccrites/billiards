@@ -92,8 +92,6 @@ private:
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
 
-    // SDL_Texture* m_pPowerTexture;
-
     std::map<BallType, SDL_Texture*> m_BallTextures;
     std::vector<Ball> m_Balls;
     std::vector<BallForce> m_BallForces;
