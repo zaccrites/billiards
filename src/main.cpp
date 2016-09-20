@@ -11,7 +11,6 @@ int main()
 
     Game game;
 
-    DEBUG_LOG("Setting up SDL \n");
     if ( ! game.setupSDL())
     {
         std::cerr
@@ -21,7 +20,6 @@ int main()
         return 1;
     }
 
-    DEBUG_LOG("Starting game \n");
     if ( ! game.start())
     {
         std::cerr

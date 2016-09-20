@@ -174,7 +174,7 @@ void Game::printHelp()
            "   by the bar on the right-hand side of the screen. \n\n"
            " - Press \"R\" to reset the balls to their starting positions. \n\n"
            " - Press \"F\" to freeze the balls in their tracks! \n\n"
-           " - Right-click or press \"Escape\" to exit.\n"
+           " - Press \"Escape\" or \"Q\" to exit.\n"
         << std::endl;
 }
 
@@ -358,6 +358,8 @@ void Game::renderFrame()
         rect.y = ball.position.y - (BALL_DIAMETER / 2);
         SDL_RenderCopy(m_pRenderer, ball.m_pTexture, NULL, &rect);
     }
+
+
 
 }
 
@@ -569,6 +571,12 @@ void Game::handleKeyPress(SDL_Keycode keycode)
             break;
         }
 
+        case SDLK_q:
+        {
+            m_IsRunning = false;
+            break;
+        }
+
     }
 }
 
@@ -591,17 +599,13 @@ void Game::handleMouseClick(const SDL_MouseButtonEvent* pEvent)
             break;
         }
 
-        case SDL_BUTTON_RIGHT:
-        {
-            m_IsRunning = false;
-            break;
-        }
     }
 }
 
 
 bool Game::start()
 {
+    DEBUG_LOG("Starting game \n");
 
     if ( ! initGame())
     {
@@ -629,6 +633,8 @@ bool Game::start()
 
 bool Game::setupSDL()
 {
+    DEBUG_LOG("Setting up SDL \n");
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
         return false;
