@@ -1,0 +1,22 @@
+
+I didn't use an IDE to create my billiards game, I just used a text editor.
+
+To compile and run the game, run
+
+    $ make
+    $ bin/billiards
+
+The game compiles on Linux and Mac OSX with SDL2 installed. It's probably
+possible to port it to Windows, but I haven't tried to yet.
+
+The game's instructions are printed to the console at startup, but I will
+reproduce them here:
+
+    How to Play:
+    -----------------------------------------------------------------------
+     - To launch the cue-ball, place the cursor over the intended
+       direction, then left-click. The power of the shot is determined
+       by the bar on the right-hand side of the screen.
+     - Press "R" to reset the balls to their starting positions.
+     - Press "F" to freeze the balls in their tracks!
+     - Press "Escape" or "Q" to exit.
