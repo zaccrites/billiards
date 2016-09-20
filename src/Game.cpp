@@ -73,10 +73,10 @@ SDL_Texture* Game::createBallTexture(uint8_t red, uint8_t green, uint8_t blue, b
             // Fix coords for calculating the pixels inside the circle.
             const auto x0 = static_cast<int16_t>(x - R);
             const auto y0 = static_cast<int16_t>(y - R);
-            const auto qq = static_cast<int16_t>((x0 * x0) + (y0 * y0));
+            const auto r0 = static_cast<int16_t>((x0 * x0) + (y0 * y0));
 
-            const bool onEdge {qq >= (R_EDGE * R_EDGE)};
-            const bool doDraw {qq <= (R * R)};
+            const bool onEdge {r0 >= (R_EDGE * R_EDGE)};
+            const bool doDraw {r0 <= (R * R)};
 
             const bool inStripeArea {x < STRIPE_AREA_WIDTH || x > (BALL_DIAMETER - STRIPE_AREA_WIDTH)};
             if (onEdge)
@@ -358,8 +358,6 @@ void Game::renderFrame()
         rect.y = ball.position.y - (BALL_DIAMETER / 2);
         SDL_RenderCopy(m_pRenderer, ball.m_pTexture, NULL, &rect);
     }
-
-
 
 }
 
