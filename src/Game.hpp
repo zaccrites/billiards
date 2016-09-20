@@ -96,6 +96,7 @@ private:
     std::vector<Ball> m_Balls;
     std::vector<BallForce> m_BallForces;
 
+    static constexpr float SHOT_POWER_OFFSET {0.2f};
     static constexpr float SHOT_POWER_MULTIPLIER {0.05f};
     float m_ShotPower;
 

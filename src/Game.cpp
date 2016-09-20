@@ -400,7 +400,8 @@ void Game::simulatePhysics(float time)
 
             // Perfectly elastic collision. Operates in the reference frame
             // of the target (i.e. the target is at rest).
-            auto force = 0.01f * (otherBall.position - ball.position) * glm::length(ball.velocity);
+            const auto speed = glm::length(ball.velocity);
+            auto force = 0.01f * (otherBall.position - ball.position) * speed * speed;
             m_BallForces.push_back({&otherBall, force, 0.0f});
 
             // The equal and opposite reaction force (Newton's Third Law)
@@ -592,7 +593,7 @@ void Game::handleMouseClick(const SDL_MouseButtonEvent* pEvent)
                 (pEvent->x - pCueBall->position.x),
                 (pEvent->y - pCueBall->position.y)
             };
-            force *= SHOT_POWER_MULTIPLIER * m_ShotPower;
+            force *= SHOT_POWER_MULTIPLIER * (m_ShotPower + SHOT_POWER_OFFSET);
 
             m_BallForces.push_back({pCueBall, force, 0.0f});
 
